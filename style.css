@@ -1,1 +1,84 @@
+* { box-sizing: border-box; }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #74ABE2, #5563DE);
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding: 28px;
+}
+
+h1 { margin-bottom: 12px; }
+
+.game-info {
+  display:flex;
+  justify-content:center;
+  gap: 1.6rem;
+  align-items:center;
+  margin-bottom: 18px;
+}
+
+/* Board */
+.game-board {
+  width: 420px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  perspective: 1000px; /* gives 3D perspective to children */
+}
+
+/* Card container */
+.card {
+  width: 100%;
+  padding-top: 100%; /* square card via aspect ratio trick */
+  position: relative;
+  cursor: pointer;
+}
+
+/* Inner element that flips */
+.card-inner {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  border-radius: 10px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+}
+
+/* Apply flip */
+.card.flip .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Front and back faces */
+.card-front, .card-back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  font-size: 2.2rem;
+}
+
+/* Hidden face (question mark) */
+.card-front {
+  background: #1f2a44;
+  color: #fff;
+}
+
+/* Revealed face (emoji) */
+.card-back {
+  background: #ffffff;
+  color: #222;
+  transform: rotateY(180deg);
+}
+
+/* small responsive tweak */
+@media (max-width: 480px) {
+  .game-board { width: 320px; gap: 8px; }
+  .card-front, .card-back { font-size: 1.6rem; }
+}
 
